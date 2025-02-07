@@ -8,7 +8,8 @@ import { Button } from "../ui/button"
 
 const AddNodeForm: FC<AddNodeFormProps> = ({
   onSubmit,
-  onClose
+  onClose,
+  data
 }): ReactElement => {
   const {
     register,
@@ -20,15 +21,33 @@ const AddNodeForm: FC<AddNodeFormProps> = ({
     control,
     watch
   } = useForm<FormData>({
-    resolver: zodResolver(NodeSchema)
+    resolver: zodResolver(NodeSchema),
+    defaultValues: {
+      id: data?.id || "",
+      name: data?.data?.label || "",
+      username: data?.data?.username || "",
+      type: data?.data?.type || "",
+      habit: data?.data?.habit || ""
+    }
   })
   const type = useWatch({ control, name: "type" })
-  console.log("errors", errors)
+  const habit = useWatch({ control, name: "habit" })
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="p-4 w-full">
-        <h1 className="text-3xl font-bold mb-4">Create New Node</h1>
+        <h1 className="text-3xl font-bold mb-4">
+          {data ? "Update Node" : "Create New Node"}
+        </h1>
+        {data && (
+          <FormField
+            type="text"
+            name="id"
+            register={register}
+            error={errors.id}
+            disabled={true}
+          />
+        )}
         <FormField
           type="text"
           placeholder="Node name"
@@ -65,10 +84,11 @@ const AddNodeForm: FC<AddNodeFormProps> = ({
               register={register}
               error={errors.habit}
               selectOptions={[
-                { label: "Habit1", value: 0 },
-                { label: "Habit2", value: 1 }
+                { label: "Reading", value: 0 },
+                { label: "Exercise", value: 1 }
               ]}
               setValue={setValue}
+              value={habit}
             />
           )}
           {type == nodeType.user && (

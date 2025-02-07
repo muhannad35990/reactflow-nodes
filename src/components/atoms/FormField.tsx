@@ -14,7 +14,8 @@ const FormField: React.FC<FormFieldProps> = ({
   error,
   value,
   setValue,
-  selectOptions
+  selectOptions,
+  disabled
 }) => (
   <div className="my-1">
     {type === "radio" && (
@@ -37,6 +38,7 @@ const FormField: React.FC<FormFieldProps> = ({
       <Select
         {...register(name)}
         onValueChange={(v) => setValue && setValue(name, v)}
+        value={value}
       >
         <SelectTrigger className="w-full">
           <SelectValue placeholder={placeholder} />
@@ -57,6 +59,7 @@ const FormField: React.FC<FormFieldProps> = ({
         placeholder={placeholder}
         {...register(name)}
         className="border rounded w-full p-1"
+        disabled={disabled}
       />
     )}
 

@@ -4,9 +4,10 @@ export interface AddbtnProps {
 }
 
 export interface DrawerProps {
-  open: boolean
-  setOpen: (v: boolean) => void
-  onSubmit: (data: FormData) => void
+  open: { show: boolean; data: any }
+  setOpen: ({ show, data }: any) => void
+  addNewNode: (data: FormData) => void
+  updateNode: (data: FormData) => void
 }
 export enum nodeType {
   user = "user",
@@ -16,9 +17,10 @@ export type habitsType = {
   label: string
   value: number
 }
-export type ValidFieldNames = "name" | "type" | "username" | "habit"
+export type ValidFieldNames = "name" | "type" | "username" | "habit" | "id"
 
 export type FormData = {
+  id?: string
   name: string
   type?: nodeType
   username?: string
@@ -26,16 +28,18 @@ export type FormData = {
 }
 export type FormFieldProps = {
   type: string
-  placeholder: string
+  placeholder?: string
   name: ValidFieldNames
   register: UseFormRegister<FormData>
   error: FieldError | undefined
   value?: string
   setValue?: UseFormSetValue<FormData>
   selectOptions?: habitsType[]
+  disabled?: boolean
 }
 
 export interface AddNodeFormProps {
   onSubmit: (data: FormData) => void
   onClose: () => void
+  data?: any
 }
