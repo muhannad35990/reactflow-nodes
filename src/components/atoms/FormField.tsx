@@ -44,7 +44,7 @@ const FormField: React.FC<FormFieldProps> = ({
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
-          {selectOptions?.map((opt: habitsType, index: number) => (
+          {selectOptions?.map((opt: habitsType) => (
             <SelectItem value={opt.label} key={opt?.value}>
               {opt.label}
             </SelectItem>

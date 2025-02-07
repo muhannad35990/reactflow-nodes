@@ -15,11 +15,8 @@ const AddNodeForm: FC<AddNodeFormProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-    getValues,
     setValue,
-    control,
-    watch
+    control
   } = useForm<FormData>({
     resolver: zodResolver(NodeSchema),
     defaultValues: {
