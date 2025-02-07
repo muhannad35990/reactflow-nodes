@@ -1,16 +1,11 @@
 "use client"
-import { useCallback, useEffect, useState } from "react"
 import {
   ReactFlow,
   MiniMap,
   Controls,
   Background,
-  useNodesState,
-  useEdgesState,
-  addEdge,
   BackgroundVariant
 } from "@xyflow/react"
-
 import "@xyflow/react/dist/style.css"
 import AddBtn from "../atoms/AddBtn"
 import AddNodeDrawer from "../molecules/AddNodeDrawer"
@@ -28,6 +23,7 @@ function FlowSection() {
     nodes,
     setShowAddDrawer
   } = useNode()
+
   return (
     <div className="relative h-full w-full">
       <ReactFlow

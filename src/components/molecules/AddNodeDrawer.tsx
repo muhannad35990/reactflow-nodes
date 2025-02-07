@@ -28,7 +28,7 @@ const AddNodeDrawer: FC<DrawerProps> = ({
         </DrawerHeader>
         <AddNodeForm
           onSubmit={open.data ? updateNode : addNewNode}
-          onClose={() => setOpen(false)}
+          onClose={() => setOpen({ show: false, data: null })}
           data={open.data}
         />
       </DrawerContent>
